@@ -1,0 +1,36 @@
+{:W('Cate/Menu')}
+
+<ol class="am-breadcrumb am-breadcrumb-slash am-text-truncate" style="margin-top:0;margin-bottom: 0;padding-bottom: 0">
+    <li><a href="{:u('index')}">首页</a></li>
+    <li><a href="#">{$cateName}</a></li>
+</ol>
+<div data-am-widget="list_news" class="am-list-news am-list-news-default" >
+    <!--列表标题-->
+    <div class="am-list-news-hd am-cf">
+        <!--带更多链接-->
+        <a href="##" class="">
+            <h2>{$cateName}</h2>
+            <!--<span class="am-list-news-more am-fr">更多 &raquo;</span>-->
+        </a>
+    </div>
+
+    <div class="am-list-news-bd">
+        <ul class="am-list">
+            <foreach name="list" item="v">
+            <li class="am-g am-list-item-dated">
+                <a href="{:U('article','aid='.$v['id'])}" class="am-list-item-hd ">{$v.title}</a>
+
+                <span class="am-list-date">{$v.ctime|date="y-m-d",###}</span>
+
+
+            </li>
+            </foreach>
+        </ul>
+    </div>
+
+</div>
+
+<ul class="am-pagination am-pagination-centered" style="font-size:0.8em">
+{$page}
+</ul>
+

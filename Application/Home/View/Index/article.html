@@ -1,0 +1,25 @@
+
+{:W('Cate/Menu')}
+<ol class="am-breadcrumb am-breadcrumb-slash am-text-truncate" style="margin-top:0;margin-bottom: 0;padding-bottom: 0">
+    <li><a href="#">首页</a></li>
+    <li><a href="{:U('category','cid='.$category['id'])}">{$category.name}</a></li>
+    <li class="am-active ">{$list.title}</li>
+</ol>
+
+
+<article class="am-article" style="padding:0.3rem;">
+    <div class="am-article-hd">
+        <h1 class="am-article-title">{$list.title}</h1>
+        <p class="am-article-meta">{$list.ctime|date="Y-m-d H:i:s",###}</p>
+    </div>
+
+    <div class="am-article-bd">
+        <p class="am-article-lead">{$list.summary}</p>
+        <!--<hr class="am-article-divider" />-->
+        <p>{$list.content}</p>
+    </div>
+</article>
+<ul class="am-pagination" style="margin: .3rem">
+{$page}
+
+</ul>
