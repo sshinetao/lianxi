@@ -1,0 +1,60 @@
+
+<footer class="admin-content-footer">
+    <hr>
+    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+</footer>
+</div>
+<!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="__PUBLIC__/assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="__PUBLIC__/assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="__PUBLIC__/assets/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/assets/js/app.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#addArticle").click(function(){
+
+
+            if($("#articleDoAdd").serialize()){
+                $.ajax({
+                    type: 'post',
+                    url: '{:U("Article/doAdd")}',
+                    data: $("#articleDoAdd").serialize(),
+                    success: function(data) {
+                        if(data.status==1){
+
+                            //$("#articleDoAdd")[0].reset();
+                            window.location.href='{:U("Article/list")}';
+                        }else{
+                            console.log($("#articleError")[0].innerHTML)
+                            $("#articleError")[0].innerHTML="<span style='color:rgba(255,0,0,0.97)'>* "+data.content+"</span>"
+                            //$(this).button('reset');
+                            //$("#alertContent").innerText=data.content;
+
+                            //$('.am-alert').alert()
+                            //alert(data.content);
+
+                        }
+                    }
+                });
+            }
+            //console.log( $("#articleDoAdd").serialize())
+        });
+    });
+
+</script>
+
+</body>
+</html>

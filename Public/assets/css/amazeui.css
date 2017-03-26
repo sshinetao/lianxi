@@ -9384,7 +9384,7 @@ TODO:
  *
  * Prepares the whole HTML page to slide-out
  * 1. Fix the main page and disallow scrolling
- * 2. Side-out transition
+ * 2. Menu-out transition
  */
 .am-offcanvas-page {
   position: fixed;

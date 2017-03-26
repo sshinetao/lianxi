@@ -7,17 +7,16 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $Category = M("Category");
-        $catelist = $Category->order('porder')->select();
         $Article = M("Article");
-        foreach ($catelist as $onecate){
 
-            $list = $Article->where('id=' . $onecate['id'])->order('ctime desc')->limit(10)->find();
-            $onecate['articles']=$list;
-
-            dump($onecate);
-        }
-        //dump($catelist);
+        //top10
+        $top10List = $Article->order('ctime desc')->limit(10)->select();
+        $this->assign("top10List", $top10List);
+//dump($top10List);
+        //rand10
+        $rand10List = $Article->order(' rand() ')->limit(10)->select();
+        $this->assign("rand10List", $rand10List);
+        // dump($rand10List);
         $this->display();
     }
 
@@ -29,14 +28,11 @@ class IndexController extends Controller
         }
 
 
-
         $Article = M("Article");
         $list = $Article->where('id=' . $aid)->find();
 
         $Category = M("Category");
-        $cate = $Category->where('id='.$list['cid'])->find();
-
-
+        $cate = $Category->where('id=' . $list['cid'])->find();
 
 
         $prevId = $Article->where('id <' . $aid)->order('porder desc')->limit(1)->field('id')->find();
@@ -61,7 +57,7 @@ class IndexController extends Controller
             $this->error('分类不存在', __CONTROLLER__);
         }
         $Category = M("Category");
-        $cate = $Category->where('id='.$cid)->find();
+        $cate = $Category->where('id=' . $cid)->find();
         $cateName = $cate['name'];
 
         //文章列表
@@ -76,9 +72,8 @@ class IndexController extends Controller
         $show = $p->show();// 分页显示输出
         $list = $Article->where('cid=' . $cid)->order('porder')->limit($p->firstRow . ',' . $p->listRows)->select();
         $this->assign('list', $list);// 赋值数据集
-        $this->assign('cateName',$cateName);
+        $this->assign('cateName', $cateName);
         $this->assign('page', $show);// 赋值分页输出
-
 
 
         $this->display(); // 输出模板
